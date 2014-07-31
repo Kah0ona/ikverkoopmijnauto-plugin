@@ -1,0 +1,108 @@
+.Sell {
+	border: 2px solid #665a53;
+	width: 75%;
+	margin: 0px auto;
+	padding: 20px;
+	background-color: #e5e5e5;
+}
+
+.Sell-form {
+	border: 0px solid #000;
+	width: 75%;
+	margin: 0px auto;
+}
+
+.Sell-sectiontitle {
+	font-size: 16pt;
+	font-weight: bold;
+	text-align: center;
+}
+
+.Sell-sectionbreak {
+	border-top: 2px solid #665a53;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+.Sell-controlgroup {
+	clear:both;
+}
+
+.Sell-controlgroup label {
+	display: inline-block;
+	width: 49%;
+	background-color: #295d82;
+	color: white;
+	font-weight: bold;
+	padding: 5px;
+	margin-bottom: 3px;
+}
+
+.Sell-radiogroup {
+	display: inline-block;
+}
+
+.Sell-controlgroup input {
+
+}
+
+.Sell-controlgroup input[type="radio"] {
+	margin-right: 5px;
+}
+
+.Sell-controlgroup select,
+.Sell-controlgroup input[type="text"] {
+	display: inline-block;
+	width: 50%;
+	background-color: #164673;
+	border: none;
+	padding: 5px;
+	color: white;
+}
+.Sell-controlgroup input[type="submit"],
+.Sell-controlgroup input[type="button"] {
+	width: 100%;
+	display: block;
+	background-color: #295d82;
+	color: white;
+	text-align: center;
+	padding: 20px;
+	font-weight: bold;
+	transition: .3s;
+	border: none;
+}
+
+.Sell-controlgroup input[type="submit"], 
+.Sell-controlgroup input[type="button"] {
+	background-color: #60C46E;
+}
+
+.Sell-controlgroup input[type="submit"]:hover,
+.Sell-controlgroup input[type="button"]:hover {
+	background-color: #164673;
+}
+label.block {
+	display: block;
+	width: 100% !important;
+}
+
+.Sell-controlgroup textarea {
+	width: 100%;
+	background-color: #164673;
+	border: none;
+	padding: 5px;
+	color: white;
+}
+
+.Sell-controlgroup input.error[type="text"],
+.Sell-controlgroup select.error,
+.Sell-form .error {
+	background-color: #8c2b35;
+}
+.Sell-form label.error {
+	width: 100%;
+}
+
+.Sell-form fieldset {
+	border: none !important;
+}
