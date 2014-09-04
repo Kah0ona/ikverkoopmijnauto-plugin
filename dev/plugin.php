@@ -43,6 +43,7 @@ class IkVerkoopMijnAuto {
 	 */
 	function __construct() {
 		add_shortcode('ikverkoopmijnauto', array($this,'render_form'));
+		add_shortcode('ikverkoopmijnauto_ads', array($this,'render_ads'));
 
 
 		// Load plugin text domain
@@ -74,6 +75,8 @@ class IkVerkoopMijnAuto {
 		if(is_admin()){
 			add_action('wp_ajax_nopriv_place_order',array($this,'process_order'));			
 			add_action('wp_ajax_place_order',array($this,'process_order'));		
+			add_action('wp_ajax_nopriv_relay_postcode',array($this,'relay_postcode'));			
+			add_action('wp_ajax_relay_postcode',array($this,'relay_postcode'));		
 		}
 	} // end constructor
 	
@@ -93,7 +96,24 @@ class IkVerkoopMijnAuto {
 		return $file_ary;
 	}	
 	
+	public function relay_postcode(){
+		$zip = $_POST['zip'];
+		$nr = $_POST['nr'];
+		include_once('lib/postcodelib.php');
 
+		$client = new PostcodeNl_Api_RestClient('MfNrQ12hKOVSIguKUyWdvRUNAcONh0Y7k7kJpQ4bXzQ',
+			'ah2iQyNWTXjTmGDa1bGZ5SI2KUv5mYpNpNgyPhkOgEE');
+
+		header('Content-Type: application/json');
+		try {
+			$result = $client->lookupAddress($zip,$nr,null,false);
+			echo json_encode($result);
+		} catch(Exception $e){
+			echo '{}';
+		}
+
+		exit;
+	}
 	/**
 	* Responds to the ajax call that submits the checkout form
 	*/
@@ -119,13 +139,14 @@ class IkVerkoopMijnAuto {
 //			print 'File Name: ' . $file['name'];
 //			print 'File Type: ' . $file['type'];
 //			print 'File Size: ' . $file['size'];
-
 		    move_uploaded_file($file["tmp_name"],
 				$path.$file['name']);
-			chmod($path.$file['name'], 0755);
+			chmod($path.$file['name'], 0777);
+			$this->resizeImage($path.$file['name']);
 			$arr[] = plugins_url().'/ikverkoopmijnauto-plugin/uploads/'.$stamp.'/'.$file['name'];
 		}
 		$_POST['picture'] = $arr;
+		$_POST['street'] = $_POST['street'] . ' ' . $_POST['number'];
 
 		print_r($_POST);	
 		$bod = ob_get_contents();
@@ -133,9 +154,16 @@ class IkVerkoopMijnAuto {
 		echo $this->curl_post(BASE_URL_BACKEND.'/newcar',$_POST);	
 		$this->logMessage($bod);
 			
-
-
 		exit;
+	}
+
+	protected function resizeImage($file){
+	/*	$thumb = new Imagick();
+		$thumb->readImage($file);    
+		$thumb->resizeImage(800, 0, Imagick::FILTER_LANCZOS,1);//800 width, keep A/R
+		$thumb->writeImage($file);
+		$thumb->clear();
+		$thumb->destroy(); */
 	}
 
 	protected function decodeParamsIntoGetString($params){
@@ -288,6 +316,22 @@ class IkVerkoopMijnAuto {
 	/*---------------------------------------------*
 	 * Controller Functions
 	 *---------------------------------------------*/
+	public function render_ads(){
+		ob_start();
+		include_once('models/AdsModel.php');
+		include_once('views/AdsView.php');
+		$m = new AdsModel($this->options);
+		$v = new AdsView($m);
+		$data = $m->getData();
+		$v->render($data);
+		$output = ob_get_contents();
+		ob_end_clean();	
+	
+		return $output;	
+
+	}
+
+
 	public function render_form($atts){
 		extract(shortcode_atts(
 			array(

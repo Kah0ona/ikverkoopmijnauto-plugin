@@ -22,7 +22,7 @@ class FormView {
 				<div class="Sell-controlgroup">
 					<label for="gender">Aanhef: *</label>
 					<div class="Sell-radiogroup">
-						<input type="radio" name="gender" value="Dhr">Dhr.
+						<input type="radio" name="gender" value="Dhr.">Dhr.
 						<input type="radio" name="gender" value="Mevrouw">Mevrouw
 					</div>
 				</div>
@@ -38,14 +38,21 @@ class FormView {
 				</div>
 
 				<div class="Sell-controlgroup">
-					<label for="street">Adres: *</label>
-					<input type="text" name="street" />
-				</div>
-
-				<div class="Sell-controlgroup">
 					<label for="zipcode">Postcode: *</label>
 					<input type="text" name="zipcode" />
 				</div>
+
+				<div class="Sell-controlgroup">
+					<label for="number">Huisnummer: *</label>
+					<input type="text" name="number" />
+				</div>
+
+				<div class="Sell-controlgroup">
+					<label for="street">Straat: *</label>
+					<input type="text" name="street" />
+				</div>
+
+
 
 				<div class="Sell-controlgroup">
 					<label for="city">Stad: *</label>
@@ -89,6 +96,12 @@ class FormView {
 					<label for="km">KM-stand: *</label>
 					<input type="text" name="km" />
 				</div>
+
+				<div class="Sell-controlgroup">
+					<label for="clientsBid">Gewenst verkoopbedrag: *</label>
+					<input type="text" name="clientsBid" />
+				</div>
+
 
 				<div class="Sell-controlgroup">
 					<label for="carrosserie">Carrosserie: *</label>

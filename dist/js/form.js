@@ -49,6 +49,36 @@ jQuery(document).ready(function($){
 
 });
 
+//postcode completion
+jQuery(document).ready(function($){
+	//if postcode and huisnummer are filled out, make api call
+	$('input[name="zipcode"], input[name="number"]').change(function(){
+		var zip = $('#order-form input[name="zipcode"]').val();
+		var nr = $('#order-form input[name="number"]').val();
+		if(zip != null && zip != undefined && nr != null && nr != undefined){
+			$.post('/wp-admin/admin-ajax.php', 
+			   { 
+					'action' : 'relay_postcode',
+					'zip' : zip, 
+					'nr' : nr 
+			   },
+			   function(jsonObj){
+//					console.log(jsonObj);
+					if(jsonObj.street == undefined){
+						$('input[name="street"]').val('');
+						$('input[name="city"]').val('');
+						return;
+					}
+					$('input[name="street"]').val(jsonObj.street);
+					$('input[name="city"]').val(jsonObj.city);
+					$('input[name="zipcode"]').val(jsonObj.postcode);
+			   }
+			);	
+		}
+	});
+
+});
+
 //validation
 
 
@@ -111,6 +141,9 @@ jQuery(document).ready(function($){
 				phone : {
 					required: true
 				},
+				clientsBid : {
+					required: true
+				},
 				accept_terms : {
 					required: true
 				},
@@ -162,7 +195,10 @@ jQuery(document).ready(function($){
 			    },
 			    year: {
 				    required: reqMsg
-			    }
+			    },
+				clientsBid : {
+					required: reqMsg
+				}
 			    
 			},
 			debug: true,
