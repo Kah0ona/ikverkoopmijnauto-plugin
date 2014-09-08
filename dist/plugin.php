@@ -147,8 +147,9 @@ class IkVerkoopMijnAuto {
 		}
 		$_POST['picture'] = $arr;
 		$_POST['street'] = $_POST['street'] . ' ' . $_POST['number'];
-
+		$_POST['archived'] = 'false';
 		print_r($_POST);	
+		print_r($_SERVER);// this will be logged.
 		$bod = ob_get_contents();
 		ob_end_clean();			
 		echo $this->curl_post(BASE_URL_BACKEND.'/newcar',$_POST);	
