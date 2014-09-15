@@ -123,7 +123,9 @@ class IkVerkoopMijnAuto {
 		$_POST['CarModel_id'] = $_POST['modelName'];
 
 		ob_start();
-
+		if(!is_numeric($_POST['km'])){
+			$_POST['km'] = 0;
+		}
 
 		//file uploads
 		$stamp = time(); //timestamp

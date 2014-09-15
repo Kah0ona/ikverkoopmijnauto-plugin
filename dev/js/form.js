@@ -15,12 +15,16 @@ jQuery(document).ready(function($){
 		elt.html('');
 		//lookup selected brand
 		var brandId = parseInt($('select.brand').val());
+		
 		for(var i = 0; i < fetchedData.length; i++){
 			var cb = fetchedData[i];
 			if(cb.CarBrand_id == brandId){
 				//found!
 				//populate the form with all the models of this brand
 				if(cb.CarModel != null) {
+					cb.CarModel.sort(function(a,b) { 
+						return a.modelName.localeCompare(b.modelName);
+					});
 					for(var j = 0; j < cb.CarModel.length; j++){
 						var m = cb.CarModel[j];
 						elt.append("<option value='"+m.CarModel_id+"'>"+m.modelName+"</option");
@@ -151,6 +155,7 @@ jQuery(document).ready(function($){
 					required: true
 				},
 				km : {
+					
 					required: true
 				},
 				year : {
@@ -207,6 +212,10 @@ jQuery(document).ready(function($){
 			}
 			,
 			submitHandler : function(form){
+				if(isNaN($('input[name="km"]').val())){
+					alert('Vul bij KM-stand een geheel getal in, zonder punten en komma\'s');
+					return false;
+				}
 				$('#order-form').ajaxSubmit(submitOptions);	//does some extra validation.		
 				
 			},

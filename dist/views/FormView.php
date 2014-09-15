@@ -101,7 +101,21 @@ class FormView {
 					<label for="clientsBid">Gewenst verkoopbedrag: *</label>
 					<input type="text" name="clientsBid" />
 				</div>
+				<div class="Sell-controlgroup">
+					<label for="enginetype">Type motor: *</label>
+					<select name="enginetype" >
+						<option>Benzine</option>
+						<option>Diesel</option>
+						<option>LPG</option>
+						<option>Hybride</option>
+						<option>Elektrisch</option>
+					</select>
+				</div>
 
+				<div class="Sell-controlgroup">
+					<label for="cc">Cilinderinhoud:</label>
+					<input type="text" name="cc" />
+				</div>
 
 				<div class="Sell-controlgroup">
 					<label for="carrosserie">Carrosserie: *</label>
@@ -137,31 +151,18 @@ class FormView {
 					<label for="colour">Kleur: *</label>
 					<select name="colour" >
 						<option>BEIGE</option>  
-						<option>BEIGE METALLIC</option>  
 						<option>BLAUW</option>  
-						<option>BLAUW METALLIC</option>  
 						<option>GROEN</option>  
-						<option>GROEN METALLIC</option>  
 						<option>BRUIN</option>  
-						<option>BRUIN METALLIC</option>  
 						<option>GEEL</option>  
-						<option>GEEL METALLIC</option>  
 						<option>GRIJS</option>  
-						<option>GRIJS METALLIC</option>  
 						<option>ORANJE</option>  
-						<option>ORANJE METALLIC</option>  
 						<option>PAARS</option>  
-						<option>PAARS METALLIC</option>  
 						<option>ROOD</option>  
-						<option>ROOD METALLIC</option>  
 						<option>ROSE</option>  
-						<option>ROSE METALLIC</option>  
 						<option>WIT</option>  
-						<option>WIT METALLIC</option>  
 						<option>ZILVERGRIJS</option>  
-						<option>ZILVERGRIJS METALLIC</option>  
 						<option>ZWART</option>  
-						<option>ZWART METALLIC</option>
 					</select>
 				</div>
 				<div class="Sell-controlgroup">
@@ -175,8 +176,8 @@ class FormView {
 				<div class="Sell-controlgroup">
 					<label for="interior">Bekleding: *</label>
 					<select name="interior" >
-						<option>Alcantara</option>  
 						<option>Stof</option>  
+						<option>Alcantara</option>  
 						<option>Half leder</option>  
 						<option>Leder</option> 
 					</select>
@@ -239,7 +240,7 @@ class FormView {
 					</select>
 				</div>
 				<div class="Sell-controlgroup">
-					<label for="comment" class="block" >Heeft u zelf nog opmerkingen?</label>
+					<label for="comment" class="block" >Heeft u zelf nog opmerkingen of vragen?</label>
 					<textarea name="comment" rows="10"></textarea>
 				</div>
 				
